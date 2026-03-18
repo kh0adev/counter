@@ -11,7 +11,9 @@
         $db = $db->connect();
         $counter = new Counter($db);
 
+        $counter->increment();
         if($counter->fetchOne()) {
+
 
 
 
@@ -20,9 +22,6 @@
                 'quantity' => $counter->quantity,
             )));
 
-            $counter->quantity += 1;
-
-            $counter->putData();
 
         } else {
             echo json_encode(array('message' => "No records found!"));

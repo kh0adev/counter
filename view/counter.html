@@ -21,7 +21,7 @@
 <p id="counter">Counting...</p>
 
 <script>
-    fetch('http://localhost:8000/api/get.php')
+    fetch(`${window.location.origin}/api/get.php`)
         .then(response => response.json())
         .then(data => {
             document.getElementById('counter').innerHTML = data.quantity;

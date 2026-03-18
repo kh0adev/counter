@@ -31,17 +31,10 @@ class Counter
         return FALSE;
     }
 
-
-    public function putData() {
-
-        $stmt = $this->conn->prepare('UPDATE counter SET Quantity = :quantity WHERE id = 1');
-
-        $stmt->bindParam(':quantity', $this->quantity);
-
-        if($stmt->execute()) {
-            return TRUE;
-        }
-
-        return FALSE;
+    public function increment()
+    {
+        $query = "UPDATE counter SET Quantity = Quantity + 1";
+        return $this->conn->query($query);
     }
+
 }
