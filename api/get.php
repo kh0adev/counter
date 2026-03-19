@@ -1,32 +1,24 @@
 <?php
-    header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 
-    include_once '../config/Database.php';
-    include_once '../models/Counter.php';
-
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-        $db = new Database();
-        $db = $db->connect();
-        $counter = new Counter($db);
-
-        $counter->increment();
-        if($counter->fetchOne()) {
+require_once __DIR__ . '/../models/Counter.php';
+require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../models/CounterService.php';
 
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
+    $db = new Database();
+    $service = new CounterService($db);
 
-            print_r(json_encode(array(
-                'id' => $counter->id,
-                'quantity' => $counter->quantity,
-            )));
-
-
-        } else {
-            echo json_encode(array('message' => "No records found!"));
-        }
-
+    $data = $service->fetch();
+    if ($data !== null) {
+        echo json_encode($data);
     } else {
-        echo json_encode(array('message' => "Error: incorrect Method!"));
+        echo json_encode(array('message' => "No records found!"));
     }
+
+} else {
+    echo json_encode(array('message' => "Error: incorrect Method!"));
+}
