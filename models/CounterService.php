@@ -70,6 +70,10 @@ class CounterService
 
 	public function increment($ip = null)
 	{
+        if ($ip && $this->ipService->isSpam($ip)) {
+            return;
+        }
+
 		$time = date(self::DateTimeFormat);
 
 		if ($this->db->conn) {

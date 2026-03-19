@@ -41,5 +41,13 @@ class FileStore
         }
         return file_put_contents($this->dataFile, $line, FILE_APPEND | LOCK_EX) !== false;
     }
+
+    public function getIpLog() :? array
+    {
+        if (!file_exists($this->dataFile)) return null;
+        $lines = @file($this->dataFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if ($lines === false) return null;
+        return $lines;
+    }
 }
 
