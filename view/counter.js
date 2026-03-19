@@ -39,7 +39,6 @@
 		count();
 
 		// poll every 5 seconds
-		fetchCounter();
 		setInterval(fetchCounter, 5000);
 
 		$('#resetBtn').on('click', function () {
