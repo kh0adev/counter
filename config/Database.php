@@ -1,9 +1,9 @@
 <?php
 
 class Database {
-    private string $host = "MYSQL8002.site4now.net";
-    private string $user = "ac6da9_counter";
-    private string $db = "db_ac6da9_counter";
+    private string $host = "localhost";
+    private string $user = "root";
+    private string $db = "test";
     private string $pwd = "counter123";
     public PDO $conn ;
 

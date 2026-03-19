@@ -102,18 +102,16 @@ class CounterService
 		if ($this->db->conn) {
 			try {
 				$this->db->conn->exec("UPDATE counter SET Quantity = 0, UpdateDate = NOW() WHERE Id = 1");
-				$okDb = true;
 			} catch (Exception $e) {
-				$okDb = false;
+                echo "DB Error: " . $e->getMessage();
 			}
 		}
 
 		$data = array('id' => 1, 'quantity' => 0, 'updateDate' => $time);
-		$okFile = $this->writeFile($data);
-
+        $this->writeFile($data);
 		$this->ipService->appendLog('reset', $time, 0);
 
-		return array('success' => ($okDb || $okFile), 'quantity' => 0, 'updateDate' => $time);
+		return array('quantity' => 0, 'updateDate' => $time);
 	}
 }
 
